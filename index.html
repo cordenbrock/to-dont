@@ -13,7 +13,7 @@
       <h1>To Don't</h1>
       <p>Make a list of things NOT to do everyday to ensure your actual to do list gets done!</p>
       <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-6">
           <hr>
           <h2></h2>
           <form id="dont-form">
@@ -27,6 +27,25 @@
             </div>
             <button type="submit" class="btn-primary">Add</button>
           </form>
+          <div id="final-list">
+            <h2>Don't do these things:</h2>
+            <ul id="dont-do-list">
+            </ul>
+          </div>
+          <div class="col-md-6">
+            <div id="show-antitasks">
+              <p>
+                Task forbidden: <span class="anti-task"></span>
+              </p>
+              <p>
+                Reason forbidden: <span class="anti-reason"></span>
+              </p>
+              <div id="buttons">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </body>
   </html>

@@ -15,7 +15,7 @@ DontDoList.prototype.assignId = function() {
   return this.currentId;
 }
 
-DontDoList.prototype.findAntiTask = function(id) {
+DontDoList.prototype.findDontDoItem = function(id) {
   for (let i=0; i< this.dontDoItems.length; i++) {
     if (this.dontDoItems[i]) {
       if (this.dontDoItems[i].id == id) {
@@ -33,23 +33,38 @@ function dontDoItem(antiTask, antiReason) {
   this.antiReason = antiReason;
 };
 
-let testTask = new dontDoItem("drink tequila", "you know why");
-addDontDoItem(testTask)
-
-
-
 
     
 // UI logic
+let dontDoList = new DontDoList();
+
+function displayDontDoItemDetails(dontDoListToDisplay) {
+  let dontDoList = $("#dont-do-list");
+  let htmlForDontDoInfo = "";
+  dontDoListToDisplay.dontDoItems.forEach(item => {
+    htmlForDontDoInfo += `<li id="${item.id}"> ${item.antiTask} <em>because...</em> ${item.antiReason}</li>`
+  });
+  dontDoList.html(htmlForDontDoInfo);
+};
+
+function showDontDoItem(dontDoId) {
+  const dontDoItem = dontDoList.findDontDoItem(dontDoId);
+  $("#final-list").show();
+  $(".anti-task").html(dontDoItem.antiTask);
+  $(".anti-reason").html(dontDoItem.antiReason);
+  let buttons = $("#buttons");
+  buttons.empty();
+  buttons.append("<button class='deleteButton' id='" + contact.id + "'>Delete</button>");
+};
 
 $(document).ready(function() {
   $("#dont-form").submit(function(event) {
     event.preventDefault();
+    let prohibitedAction = $("#prohibited-action").val();
+    let prohibitedReason = $("#prohibited-reason").val();
+    console.log(prohibitedAction, prohibitedReason);
+    let newDontDoItem = new dontDoItem(prohibitedAction, prohibitedReason);
+    dontDoList.addDontDoItem(newDontDoItem);
+    displayDontDoItemDetails(dontDoList);
   });
 });
-
-
-
-
-
-
